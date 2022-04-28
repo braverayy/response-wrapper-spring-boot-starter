@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -44,6 +45,9 @@ public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
                                   @NonNull MediaType selectedContentType,
                                   @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
+        HttpHeaders headers = response.getHeaders();
+        headers.add("content-type",MediaType.APPLICATION_JSON_VALUE);
+
         ResponseEntity<Object> responseEntity = ResponseEntity.success(body);
         return selectedConverterType == StringHttpMessageConverter.class
                 ? toJsonString(responseEntity) : responseEntity;
