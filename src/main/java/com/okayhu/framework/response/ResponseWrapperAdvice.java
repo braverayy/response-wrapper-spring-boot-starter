@@ -32,6 +32,8 @@ public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(@NonNull MethodParameter returnType,
                             @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
         return returnType.getParameterType() != ResponseEntity.class
+                && (AnnotationUtils.findAnnotation(Objects.requireNonNull(returnType.getMethod()), WrapResponse.class) != null
+                || AnnotationUtils.findAnnotation(returnType.getDeclaringClass(), WrapResponse.class) != null)
                 && AnnotationUtils.findAnnotation(Objects.requireNonNull(returnType.getMethod()), NotWrapResponse.class) == null
                 && AnnotationUtils.findAnnotation(returnType.getDeclaringClass(), NotWrapResponse.class) == null;
     }

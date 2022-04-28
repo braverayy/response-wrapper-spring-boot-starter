@@ -5,14 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.okayhu.framework</groupId>
-    <artifactId>wrapper-response-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <artifactId>response-wrapper-spring-boot-starter</artifactId>
+    <version>0.0.2</version>
 
     <properties>
-        <spring-webmvc.version>5.3.14</spring-webmvc.version>
-        <lombok.version>1.18.22</lombok.version>
-        <slf4j-api.version>1.7.32</slf4j-api.version>
-        <jackson-databind.version>2.13.1</jackson-databind.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+        <spring-webmvc.version>5.3.19</spring-webmvc.version>
+        <lombok.version>1.18.24</lombok.version>
+        <slf4j-api.version>1.7.36</slf4j-api.version>
+        <jackson-databind.version>2.13.2.2</jackson-databind.version>
     </properties>
 
     <dependencies>
@@ -41,4 +44,25 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
